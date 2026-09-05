@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "source": "合成示例 · 高恢复场景",
+    "syncedAt": "2026-09-05T07:08:00+08:00",
+    "completeness": 0.98,
+    "demo": true
+  },
+  "today": {
+    "date": "2026-09-05",
+    "sleepMinutes": 470,
+    "deepSleepMinutes": 88,
+    "hrvMs": 49,
+    "restingHeartRate": 54,
+    "bodyBatteryMorning": 82,
+    "bodyBatteryOvernightGain": 61,
+    "stressYesterday": 28
+  },
+  "baseline": {
+    "windowDays": 28,
+    "sleepMinutes": 438,
+    "hrvMs": 45,
+    "restingHeartRate": 55,
+    "stress": 31
+  },
+  "plan": {
+    "activity": "跑步",
+    "durationMinutes": 45,
+    "intensity": "中等",
+    "time": "18:30"
+  }
+}

@@ -1,0 +1,40 @@
+# This working directory also contains private experiments. Track only the
+# independent app. Keep this list aligned with scripts/check-repo.mjs.
+/*
+!/.gitignore
+!/.gitattributes
+!/AGENTS.md
+!/README.md
+!/README.en.md
+!/DOGFOOD.md
+!/THIRD_PARTY_NOTICES.md
+!/package.json
+!/index.html
+!/app.js
+!/styles.css
+!/favicon.svg
+!/data/
+/data/*
+!/data/example-garmin-day.json
+!/data/example-ready-day.json
+!/scripts/
+/scripts/*
+!/scripts/serve.mjs
+!/scripts/check-repo.mjs
+!/tests/
+/tests/*
+!/tests/server.test.mjs
+!/docs/
+/docs/*
+!/docs/ARCHITECTURE.md
+!/docs/ROADMAP.md
+# Never override these exclusions to publish personal data or credentials.
+**/.env
+**/.env.*
+**/*.sqlite
+**/*.sqlite3
+**/*.db
+**/*.pem
+**/*.key
+**/node_modules/
+**/.DS_Store

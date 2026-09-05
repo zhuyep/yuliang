@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "source": "合成示例 · 减量场景",
+    "syncedAt": "2026-09-04T07:12:00+08:00",
+    "completeness": 0.96,
+    "demo": true
+  },
+  "today": {
+    "date": "2026-09-04",
+    "sleepMinutes": 402,
+    "deepSleepMinutes": 72,
+    "hrvMs": 41,
+    "restingHeartRate": 58,
+    "bodyBatteryMorning": 58,
+    "bodyBatteryOvernightGain": 42,
+    "stressYesterday": 38
+  },
+  "baseline": {
+    "windowDays": 28,
+    "sleepMinutes": 438,
+    "hrvMs": 45,
+    "restingHeartRate": 55,
+    "stress": 31
+  },
+  "plan": {
+    "activity": "跑步",
+    "durationMinutes": 45,
+    "intensity": "中等",
+    "time": "18:30"
+  }
+}

@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="余量是一款本地优先的 Garmin 数据解读原型，把恢复信号翻译成当天和本周的活动安排。"
+    />
+    <meta name="theme-color" content="#f5f5f7" />
+    <title>余量 · Garmin 数据解读助手</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+    <div class="app-shell">
+      <aside class="side-rail" aria-label="主导航">
+        <div class="brand-block">
+          <a class="brand" href="#today" aria-label="余量首页">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 48 48" role="img">
+                <path d="M8 32c6-1 8-12 14-12s7 9 12 9c3 0 5-3 7-7" />
+                <circle cx="8" cy="32" r="2.5" />
+                <circle cx="41" cy="22" r="2.5" />
+              </svg>
+            </span>
+            <span>
+              <strong>余量</strong>
+              <small>RESERVE</small>
+            </span>
+          </a>
+          <p>先看今天怎么安排，再看数字为什么。</p>
+        </div>
+
+        <nav class="primary-nav">
+          <a class="nav-link is-active" href="#today" data-section="today" aria-current="page">
+            <span>今日路线</span><small>现在</small>
+          </a>
+          <a class="nav-link" href="#week" data-section="week">
+            <span>本周节奏</span><small>7 天</small>
+          </a>
+          <a class="nav-link" href="#signals" data-section="signals">
+            <span>看懂指标</span><small>5 项</small>
+          </a>
+          <a class="nav-link" href="#data" data-section="data">
+            <span>数据边界</span><small>本地</small>
+          </a>
+        </nav>
+
+        <div class="rail-footer">
+          <span class="sync-dot" aria-hidden="true"></span>
+          <span>
+            <small>最后同步</small>
+            <strong id="rail-sync-time">今天 07:12</strong>
+          </span>
+        </div>
+      </aside>
+
+      <main id="main-content">
+        <header class="topbar">
+          <div>
+            <p class="topbar-kicker" id="today-date">9 月 4 日 · 星期五</p>
+            <p class="topbar-context">个人恢复与活动安排</p>
+          </div>
+          <div class="topbar-actions">
+            <button class="source-pill" id="source-button" type="button" aria-haspopup="dialog" aria-label="查看数据来源：Garmin 示例数据">
+              <span class="source-status" aria-hidden="true"></span>
+              <span id="source-label">Garmin 示例数据</span>
+            </button>
+            <button class="avatar-button" type="button" aria-label="个人设置">我</button>
+          </div>
+        </header>
+
+        <div class="content-frame">
+          <section class="today-layout" id="today" aria-labelledby="recommendation-title">
+            <article class="decision-card">
+              <div class="decision-copy">
+                <div class="section-label">
+                  <span class="label-rule"></span>
+                  <span>今天的判断</span>
+                  <span class="confidence-chip" id="confidence-chip">置信度：中等</span>
+                </div>
+
+                <h1 id="recommendation-title">今天，留一点力气。</h1>
+                <p class="decision-summary" id="recommendation-summary">
+                  恢复信号有些分歧。保留活动习惯，但把原来的节奏跑改成轻松活动更稳妥。
+                </p>
+
+                <div class="recommended-action" aria-live="polite">
+                  <span class="action-time" id="action-time">18:30</span>
+                  <div>
+                    <small>建议安排</small>
+                    <strong id="action-title">30 分钟轻松跑或快走</strong>
+                    <p id="action-detail">以能完整说出一句话的强度进行；结束后留 5 分钟舒缓。</p>
+                  </div>
+                </div>
+
+                <div class="decision-actions">
+                  <button class="primary-button" id="accept-plan" type="button">按这个安排</button>
+                  <button class="text-button" id="change-plan" type="button">我今天另有计划</button>
+                </div>
+              </div>
+
+              <div class="route-visual" aria-label="从晨起到晚间的精力路线图">
+                <div class="route-head">
+                  <span>今日安排示意 · 非预测</span>
+                  <span id="route-caption">适度保留</span>
+                </div>
+
+                <svg class="route-map" viewBox="0 0 620 330" role="img" aria-labelledby="route-title route-desc">
+                  <title id="route-title">今日活动安排示意</title>
+                  <desc id="route-desc">晨起 Body Battery 为 58，建议 18:30 进行轻松活动。曲线只表示安排思路，不是精力预测。</desc>
+                  <g class="contours" aria-hidden="true">
+                    <path d="M-30 82C79 11 160 53 244 28c85-26 137-1 215 4 74 5 128-37 210-10" />
+                    <path d="M-28 109C70 44 158 77 240 54c96-28 148 7 226 6 80-1 129-37 210-18" />
+                    <path d="M-20 270c103-63 167-34 244-62 99-36 140 20 223-11 84-31 148-26 222 13" />
+                    <path d="M-28 298c92-55 166-36 249-62 98-31 148 15 230-12 85-27 142-22 219 20" />
+                  </g>
+                  <path class="safe-band" d="M48 172C148 124 220 165 302 145c80-19 149-7 270 33" />
+                  <path class="energy-line-shadow" id="energy-line-shadow" d="M48 118C151 88 215 124 302 142c92 19 173 37 270 88" />
+                  <path class="energy-line" id="energy-line" d="M48 118C151 88 215 124 302 142c92 19 173 37 270 88" />
+                  <g class="route-points">
+                    <g id="morning-point" transform="translate(48 118)">
+                      <circle class="point-ring" r="11" />
+                      <circle class="point-core" r="4" />
+                      <text x="0" y="-25">晨起 58</text>
+                    </g>
+                    <g id="midday-point" transform="translate(302 142)">
+                      <circle class="point-ring" r="11" />
+                      <circle class="point-core" r="4" />
+                      <text x="0" y="-25">白天变化</text>
+                    </g>
+                    <g id="evening-point" transform="translate(572 230)">
+                      <circle class="point-ring is-coral" r="11" />
+                      <circle class="point-core is-coral" r="4" />
+                      <text x="0" y="-25">晚间保留</text>
+                    </g>
+                  </g>
+                  <g class="activity-pin" id="activity-pin" transform="translate(428 182)">
+                    <line x1="0" y1="0" x2="0" y2="53" />
+                    <circle cy="56" r="5" />
+                    <text x="0" y="-12">轻松活动</text>
+                  </g>
+                  <g class="time-axis" aria-hidden="true">
+                    <text x="48" y="304">07:00</text>
+                    <text x="302" y="304">13:00</text>
+                    <text x="572" y="304">22:00</text>
+                  </g>
+                </svg>
+
+                <div class="route-legend">
+                  <span><i class="legend-line"></i>安排示意</span>
+                  <span><i class="legend-band"></i>预留缓冲</span>
+                  <button class="why-button" id="why-button" type="button" aria-expanded="false" aria-controls="evidence-panel">
+                    为什么这样安排
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <aside class="checkin-card" aria-labelledby="checkin-title">
+              <div class="checkin-head">
+                <div>
+                  <span class="mini-label">你的感受也算数</span>
+                  <h2 id="checkin-title">现在身体怎么样？</h2>
+                </div>
+                <span class="checkin-time">约 15 秒</span>
+              </div>
+
+              <fieldset class="checkin-group">
+                <legend>精力</legend>
+                <div class="segmented" data-checkin="energy">
+                  <button type="button" data-value="low" aria-pressed="false">偏低</button>
+                  <button type="button" class="is-selected" data-value="normal" aria-pressed="true">一般</button>
+                  <button type="button" data-value="high" aria-pressed="false">不错</button>
+                </div>
+              </fieldset>
+
+              <fieldset class="checkin-group">
+                <legend>身体信号</legend>
+                <div class="toggle-grid">
+                  <button class="toggle-chip" type="button" data-toggle="soreness" aria-pressed="false">明显酸痛</button>
+                  <button class="toggle-chip" type="button" data-toggle="pain" aria-pressed="false">疼痛不适</button>
+                  <button class="toggle-chip" type="button" data-toggle="illness" aria-pressed="false">像要生病</button>
+                  <button class="toggle-chip" type="button" data-toggle="stress" aria-pressed="false">压力很大</button>
+                </div>
+              </fieldset>
+
+              <button class="update-button" id="update-advice" type="button">
+                <span>更新今日建议</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </aside>
+          </section>
+
+          <section class="evidence-panel" id="evidence-panel" hidden>
+            <div>
+              <span class="mini-label">判断依据</span>
+              <h2>不是一个分数说了算</h2>
+            </div>
+            <ol id="evidence-list">
+              <li><strong>睡眠比个人常态少 36 分钟</strong><span>这是保留强度的主要原因。</span></li>
+              <li><strong>夜间 HRV 比 28 天中位数低 9%</strong><span>单日变化只作为辅助信号。</span></li>
+              <li><strong>晨起 Body Battery 为 58</strong><span>可以活动，但没有足够证据支持高强度。</span></li>
+            </ol>
+            <p class="boundary-note">这些判断用于安排日常活动，不用于诊断疾病。身体感觉与设备冲突时，优先听身体的。</p>
+          </section>
+
+          <section class="section-block" id="signals" aria-labelledby="signals-title">
+            <div class="section-heading">
+              <div>
+                <span class="mini-label" id="baseline-label">与个人 28 天基线比较</span>
+                <h2 id="signals-title">今天值得关注的信号</h2>
+              </div>
+              <button class="text-button compact" id="metric-help" type="button">这些数字怎么看</button>
+            </div>
+
+            <div class="signal-grid" id="signal-grid">
+              <article class="signal-card is-attention" data-signal="sleep">
+                <div class="signal-top"><span>睡眠</span><span class="trend-down">−36 分钟</span></div>
+                <strong>6 小时 42 分</strong>
+                <div class="mini-track"><i style="width: 78%"></i><b style="left: 85%"></b></div>
+                <p>低于你近 28 天的常态，深睡比例接近常态。</p>
+              </article>
+              <article class="signal-card is-attention" data-signal="hrv">
+                <div class="signal-top"><span>夜间 HRV</span><span class="trend-down">−9%</span></div>
+                <strong>41 <small>ms</small></strong>
+                <div class="mini-track" aria-label="当前 HRV 与 28 天中位数比较"><i style="width: 68%"></i><b style="left: 75%"></b></div>
+                <p>略低于个人中位数；连续趋势比单日更重要。</p>
+              </article>
+              <article class="signal-card" data-signal="rhr">
+                <div class="signal-top"><span>静息心率</span><span class="trend-up">+3</span></div>
+                <strong>58 <small>bpm</small></strong>
+                <div class="mini-track" aria-label="当前静息心率与 28 天基线比较"><i style="width: 58%"></i><b style="left: 55%"></b></div>
+                <p>比常态稍高，但仍在你的常见波动范围内。</p>
+              </article>
+              <article class="signal-card" data-signal="battery">
+                <div class="signal-top"><span>晨起余量</span><span>+42 一夜</span></div>
+                <strong>58 <small>/ 100</small></strong>
+                <div class="battery-track"><i style="width: 58%"></i></div>
+                <p>足够维持活动习惯，不适合追求峰值表现。</p>
+              </article>
+              <article class="signal-card" data-signal="stress">
+                <div class="signal-top"><span>昨日压力</span><span class="trend-up">+7</span></div>
+                <strong>38 <small>/ 100</small></strong>
+                <div class="mini-track" aria-label="昨日平均压力与 28 天基线比较"><i style="width: 38%"></i><b style="left: 31%"></b></div>
+                <p>下午持续偏高，可能影响了晚间恢复速度。</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="section-block week-section" id="week" aria-labelledby="week-title">
+            <div class="section-heading">
+              <div>
+                <span class="mini-label" id="week-range">8 月 31 日—9 月 6 日</span>
+                <h2 id="week-title">本周节奏</h2>
+              </div>
+              <div class="load-summary">
+                <span>计划负荷</span>
+                <strong id="weekly-load">示例 · 适中</strong>
+              </div>
+            </div>
+
+            <div class="week-strip" id="week-strip" aria-label="本周活动安排">
+              <article class="day-card is-complete"><span>一</span><time>31</time><i></i><strong>步行</strong><small>42 分钟</small></article>
+              <article class="day-card is-complete"><span>二</span><time>01</time><i></i><strong>力量</strong><small>28 分钟</small></article>
+              <article class="day-card is-rest"><span>三</span><time>02</time><i></i><strong>恢复</strong><small>已完成</small></article>
+              <article class="day-card is-complete"><span>四</span><time>03</time><i></i><strong>快走</strong><small>36 分钟</small></article>
+              <article class="day-card is-today"><span>五</span><time>04</time><i></i><strong id="today-plan-label">轻松活动</strong><small id="today-plan-duration">30 分钟</small></article>
+              <article class="day-card"><span>六</span><time>05</time><i></i><strong>低强度</strong><small>45 分钟</small></article>
+              <article class="day-card is-rest"><span>日</span><time>06</time><i></i><strong>休息</strong><small>散步可选</small></article>
+            </div>
+
+            <div class="week-note">
+              <span class="week-note-mark" aria-hidden="true"></span>
+              <p id="week-note-copy"><strong>这次只调今天，不重排整周。</strong> 其他日期先保持原计划；下一次活动前再根据恢复信号复核。</p>
+            </div>
+          </section>
+
+          <section class="section-block data-section" id="data" aria-labelledby="data-title">
+            <div class="section-heading">
+              <div>
+                <span class="mini-label">数据与边界</span>
+                <h2 id="data-title">每条建议都能追溯</h2>
+              </div>
+            </div>
+
+            <div class="data-grid">
+              <div class="data-card">
+                <span class="data-index">A</span>
+                <h3>设备记录</h3>
+                <p>睡眠、心率、HRV、压力等指标。当前显示示例或导入文件中的同步时间与完整性信息。</p>
+              </div>
+              <div class="data-card">
+                <span class="data-index">B</span>
+                <h3>程序判断</h3>
+                <p>当前按示例或导入基线运行规则，尚未接入生成式 AI。规则未经临床验证，不用于诊断。</p>
+              </div>
+              <div class="data-card">
+                <span class="data-index">C</span>
+                <h3>你的感受</h3>
+                <p>精力、酸痛、疼痛和生病迹象优先级高于设备分数，可随时推翻建议。</p>
+              </div>
+            </div>
+
+            <div class="import-row">
+              <div>
+                <strong id="import-status-title">当前为示例数据</strong>
+                <p id="import-status-copy">可以导入符合原型格式的 JSON；文件只在这个浏览器里处理，不会上传。</p>
+              </div>
+              <div class="import-actions">
+                <button class="secondary-button" id="import-data" type="button">导入本地数据</button>
+                <input id="data-file" type="file" accept="application/json,.json" hidden />
+                <button class="text-button compact" id="reset-demo" type="button">恢复示例</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <nav class="mobile-nav" aria-label="移动端主导航">
+      <a class="is-active" href="#today" aria-current="page"><span>路线</span></a>
+      <a href="#signals"><span>指标</span></a>
+      <a href="#week"><span>本周</span></a>
+      <a href="#data"><span>数据</span></a>
+    </nav>
+
+    <dialog class="plan-dialog" id="plan-dialog" aria-labelledby="plan-dialog-title">
+      <form method="dialog" id="plan-form">
+        <div class="dialog-head">
+          <div>
+            <span class="mini-label">告诉我原计划</span>
+            <h2 id="plan-dialog-title">今天原本想做什么？</h2>
+          </div>
+          <button class="dialog-close" value="cancel" aria-label="关闭">×</button>
+        </div>
+
+        <label>
+          活动
+          <select id="planned-activity">
+            <option value="跑步">跑步</option>
+            <option value="步行">步行</option>
+            <option value="骑行">骑行</option>
+            <option value="力量训练">力量训练</option>
+            <option value="游泳">游泳</option>
+            <option value="其他活动">其他活动</option>
+          </select>
+        </label>
+
+        <div class="field-pair">
+          <label>
+            预计时长
+            <select id="planned-duration">
+              <option value="20">20 分钟</option>
+              <option value="30">30 分钟</option>
+              <option value="45" selected>45 分钟</option>
+              <option value="60">60 分钟</option>
+              <option value="90">90 分钟</option>
+            </select>
+          </label>
+          <label>
+            原计划强度
+            <select id="planned-intensity">
+              <option value="轻松">轻松</option>
+              <option value="中等" selected>中等</option>
+              <option value="较高">较高</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          方便活动的时间
+          <input id="planned-time" type="time" value="18:30" />
+        </label>
+
+        <menu>
+          <button class="text-button" value="cancel">取消</button>
+          <button class="primary-button" id="save-plan" value="default">重新计算</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <dialog class="source-dialog" id="source-dialog" aria-labelledby="source-dialog-title">
+      <div class="dialog-head">
+        <div>
+          <span class="mini-label">数据来源</span>
+          <h2 id="source-dialog-title">这个原型知道什么</h2>
+        </div>
+        <button class="dialog-close" id="close-source" aria-label="关闭">×</button>
+      </div>
+      <div class="source-detail">
+        <div><span class="source-status"></span><strong id="source-dialog-label">Garmin 示例数据</strong></div>
+        <p id="source-dialog-copy">当前展示的是一组用于验证界面的模拟数据，还没有连接你的 Garmin 账户。</p>
+        <dl>
+          <div><dt>最后同步</dt><dd id="source-sync-time">2026-09-04 07:12</dd></div>
+          <div><dt>数据完整性</dt><dd id="source-completeness">96%</dd></div>
+          <div><dt>保存位置</dt><dd>当前浏览器</dd></div>
+        </dl>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
