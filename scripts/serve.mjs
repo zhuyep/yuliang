@@ -3,11 +3,13 @@ import { open, realpath } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createAPI } from "../lib/api.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const publicFiles = new Set([
   "index.html", "styles.css", "app.js", "favicon.svg",
   "data/example-garmin-day.json", "data/example-ready-day.json",
+  "insights.html", "insights.css", "insights.js",
 ]);
 const mime = {
   ".css": "text/css; charset=utf-8",
@@ -17,12 +19,9 @@ const mime = {
   ".svg": "image/svg+xml",
 };
 
-export function createAppServer(appRoot = root) {
+export function createAppServer(appRoot = root, apiOptions = {}) {
+const handleAPI = createAPI(apiOptions);
 return createServer(async (request, response) => {
-  if (!["GET", "HEAD"].includes(request.method)) {
-    response.writeHead(405, { allow: "GET, HEAD" }).end("Method not allowed");
-    return;
-  }
   let pathname;
   try {
     const rawPath = (request.url || "/").split("?", 1)[0].split("#", 1)[0];
@@ -33,7 +32,13 @@ return createServer(async (request, response) => {
     return;
   }
 
-  const relativePath = pathname === "/" ? "index.html" : pathname.slice(1);
+  if (await handleAPI(request, response, pathname)) return;
+  if (!["GET", "HEAD"].includes(request.method)) {
+    response.writeHead(405, { allow: "GET, HEAD" }).end("Method not allowed");
+    return;
+  }
+
+  const relativePath = pathname === "/" ? "insights.html" : pathname.slice(1);
   if (!pathname.startsWith("/") || !publicFiles.has(relativePath)) {
     response.writeHead(404).end("Not found");
     return;

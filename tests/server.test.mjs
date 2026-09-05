@@ -60,7 +60,7 @@ test("an allowed filename cannot expose a symlink target", async (t) => {
     await writeFile(join(directory, "private.txt"), "synthetic test sentinel");
     await symlink("private.txt", join(directory, "index.html"));
     const get = await start(t, directory);
-    assert.equal((await get("/")).status, 404);
+    assert.equal((await get("/index.html")).status, 404);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

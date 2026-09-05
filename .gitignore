@@ -13,6 +13,16 @@
 !/app.js
 !/styles.css
 !/favicon.svg
+!/insights.html
+!/insights.css
+!/insights.js
+!/lib/
+/lib/*
+!/lib/analysis.mjs
+!/lib/api.mjs
+!/lib/garmin-database.mjs
+!/lib/feedback.mjs
+!/lib/model.mjs
 !/data/
 /data/*
 !/data/example-garmin-day.json
@@ -24,10 +34,12 @@
 !/tests/
 /tests/*
 !/tests/server.test.mjs
+!/tests/insights.test.mjs
 !/docs/
 /docs/*
 !/docs/ARCHITECTURE.md
 !/docs/ROADMAP.md
+!/docs/LOCAL_INSIGHTS.md
 # Never override these exclusions to publish personal data or credentials.
 **/.env
 **/.env.*

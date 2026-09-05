@@ -8,6 +8,8 @@ const allowed = new Set([
   "app.js", "styles.css", "favicon.svg", "data/example-garmin-day.json",
   "data/example-ready-day.json", "scripts/serve.mjs", "scripts/check-repo.mjs",
   "tests/server.test.mjs", "docs/ARCHITECTURE.md", "docs/ROADMAP.md",
+  "insights.html", "insights.css", "insights.js", "lib/analysis.mjs", "lib/api.mjs",
+  "lib/garmin-database.mjs", "lib/feedback.mjs", "lib/model.mjs", "tests/insights.test.mjs", "docs/LOCAL_INSIGHTS.md",
 ]);
 const patterns = [
   ["GitHub credential", /(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})/],

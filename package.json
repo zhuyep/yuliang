@@ -1,6 +1,6 @@
 {
   "name": "yuliang",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "Local-first wearable data interpretation and activity planning prototype",
@@ -15,6 +15,6 @@
     "dev": "node scripts/serve.mjs",
     "test": "node --test tests/*.test.mjs",
     "check:repo": "node scripts/check-repo.mjs",
-    "check": "node --check app.js && node --check scripts/serve.mjs && npm test && npm run check:repo"
+    "check": "node --check app.js && node --check insights.js && node --check scripts/serve.mjs && npm test && npm run check:repo"
   }
 }

@@ -1,0 +1,77 @@
+.insights-page { background: var(--canvas); }
+.insight-header { max-width: 1220px; margin: auto; padding: 25px 32px; display: flex; align-items: center; gap: 30px; border-bottom: 1px solid var(--line); }
+.insight-brand { font: 700 25px var(--display); letter-spacing: -.04em; }
+.insight-brand span { display: block; font: 11px var(--body); color: var(--ink-soft); margin-top: 4px; letter-spacing: 0; }
+.insight-header nav { display: flex; gap: 25px; margin-left: auto; font-size: 13px; }
+.privacy-tag, .engine-note { font-size: 12px; color: #287447; }
+.insight-main { max-width: 1180px; margin: auto; padding: 36px 32px; }
+.insight-intro, .source-bar, .reading-meta { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.insight-intro h1 { font-size: clamp(30px, 4vw, 44px); letter-spacing: -.045em; line-height: 1.16; margin: 8px 0 12px; }
+.eyebrow { color: var(--ink-soft); font-size: 11px; letter-spacing: .04em; margin: 0 0 8px; }
+.muted { color: var(--ink-soft); margin: 5px 0; }
+.small { font-size: 12px; }
+.source-bar { margin-top: 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 20px 0; }
+.source-bar p { font-size: 12px; }
+.source-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.insights-page .primary-button, .secondary-button { min-height: 40px; padding: 10px 16px; font-size: 13px; border-radius: 11px; }
+.secondary-button { border: 1px solid var(--line-strong); background: white; cursor: pointer; }
+.file-label { position: relative; overflow: hidden; display: inline-flex; align-items: center; }
+.file-label input { position: absolute; inset: 0; opacity: 0; width: 100%; cursor: pointer; }
+.status-message { color: #835415; font-size: 13px; margin: 12px 0; min-height: 20px; }
+.insight-columns { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(290px, 1fr); gap: 20px; }
+.reading-card, .plan-card, .ask-card, .feedback-card { background: white; border: 1px solid var(--line); border-radius: 22px; padding: 28px; }
+.reading-card { border-top: 4px solid var(--blue); }
+.reading-meta { font: 11px var(--utility); color: var(--ink-soft); }
+.reading-card h2 { font: 650 clamp(25px, 3vw, 34px)/1.25 var(--display); letter-spacing: -.035em; margin: 24px 0 18px; max-width: 18em; }
+#reading-summary { line-height: 1.9; font-size: 14px; }
+.action-panel { margin-top: 24px; padding: 19px 20px; border-left: 3px solid var(--blue); background: var(--surface-tint); border-radius: 0 12px 12px 0; }
+.action-panel p { margin: 0; line-height: 1.8; font-size: 14px; }
+.reading-limits { padding-left: 17px; font-size: 11px; color: var(--ink-soft); line-height: 1.8; }
+.plan-card h2, .ask-card h2, .feedback-card h2, .evidence-section h2 { font-size: 21px; margin: 0 0 17px; }
+.plan-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.insights-page label { display: grid; gap: 7px; font-size: 12px; color: var(--ink-soft); }
+.insights-page input:not([type=checkbox]):not([type=file]), .insights-page select, .insights-page textarea { width: 100%; min-width: 0; padding: 10px 11px; border-radius: 9px; border: 1px solid var(--line-strong); background: var(--surface-soft); color: var(--ink); font: 14px var(--body); }
+.insights-page textarea { margin-bottom: 14px; resize: vertical; }
+.insights-page fieldset { border: 0; margin: 20px 0; padding: 0; display: flex; gap: 10px; flex-wrap: wrap; }
+.insights-page fieldset legend { font-size: 12px; color: var(--ink-soft); margin-bottom: 10px; }
+.insights-page fieldset label { display: flex; align-items: center; color: var(--ink); }
+.evidence-section { margin: 38px 0 24px; }
+.insights-page .section-heading { margin-bottom: 18px; }
+.evidence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.evidence-item { background: white; border: 1px solid var(--line); border-radius: 15px; padding: 19px; }
+.evidence-item h3 { font-size: 14px; margin: 0 0 13px; }
+.evidence-value { font: 600 25px var(--utility); letter-spacing: -.045em; }
+.evidence-value small { font: 11px var(--body); letter-spacing: 0; color: var(--ink-soft); }
+.evidence-item p { font-size: 12px; margin: 10px 0; }
+.evidence-item details { font-size: 11px; color: var(--ink-soft); }
+.evidence-item summary { cursor: pointer; }
+.evidence-id { color: var(--blue); font: 10px var(--utility); margin-right: 6px; }
+.ask-card, .feedback-card { margin-top: 22px; }
+.question-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 13px; }
+.question-chips button { background: var(--canvas); border: 1px solid var(--line); padding: 7px 12px; border-radius: 20px; cursor: pointer; font-size: 12px; }
+#ask-form { display: flex; gap: 10px; }
+#ask-form input { flex: 1; }
+.answer-text { white-space: pre-wrap; font-size: 14px; line-height: 1.9; margin-top: 14px; padding: 17px; background: var(--surface-soft); border-radius: 12px; }
+#feedback-form { margin-top: 20px; max-width: 780px; }
+#feedback-form > label { margin-top: 15px; }
+.history-row { padding: 13px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+.history-row p { margin: 4px 0; font-size: 12px; }
+.history-row button { white-space: nowrap; }
+.insight-footer { display: flex; justify-content: space-between; gap: 15px; padding: 28px 0 6px; font-size: 11px; color: var(--ink-soft); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+.insights-page button:disabled { opacity: .5; cursor: wait; }
+@media (max-width: 760px) {
+  .insight-header { padding: 18px 20px; gap: 15px; }
+  .insight-header nav { gap: 14px; font-size: 12px; }
+  .privacy-tag { display: none; }
+  .insight-main { padding: 26px 18px; }
+  .insight-intro, .source-bar { align-items: start; flex-direction: column; }
+  .insight-columns { grid-template-columns: 1fr; }
+  .reading-card, .plan-card, .ask-card, .feedback-card { padding: 22px; }
+  .evidence-grid { grid-template-columns: 1fr 1fr; }
+  .insight-footer { flex-direction: column; }
+  #ask-form { flex-wrap: wrap; }
+  #ask-form input { flex-basis: 100%; }
+}
+@media (max-width: 420px) { .evidence-grid { grid-template-columns: 1fr; } .insight-header nav a:last-child { display: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
