@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/zhuyep/yuliang/blob/main/docs/daily-summary.schema.json",
+  "title": "Yuliang daily wearable summary",
+  "description": "Local import format. Missing metrics are omitted or null; zero is preserved as a real value where allowed.",
+  "type": "object",
+  "required": ["syncedAt", "days"],
+  "properties": {
+    "demo": {
+      "type": "boolean",
+      "description": "Set true only for fully synthetic data."
+    },
+    "syncedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "days": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 90,
+      "items": {
+        "$ref": "#/$defs/day"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "day": {
+      "type": "object",
+      "required": ["date"],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "sleepMinutes": {
+          "anyOf": [{ "type": "null" }, { "type": "number", "minimum": 1, "maximum": 1440 }]
+        },
+        "hrvMs": {
+          "anyOf": [{ "type": "null" }, { "type": "number", "minimum": 1, "maximum": 300 }]
+        },
+        "restingHeartRate": {
+          "anyOf": [{ "type": "null" }, { "type": "number", "minimum": 25, "maximum": 220 }]
+        },
+        "bodyBatteryMorning": {
+          "anyOf": [{ "type": "null" }, { "type": "number", "minimum": 0, "maximum": 100 }]
+        },
+        "steps": {
+          "anyOf": [{ "type": "null" }, { "type": "number", "minimum": 0, "maximum": 150000 }]
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

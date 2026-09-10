@@ -1,0 +1,32 @@
+name: 场景建议 / Use-case proposal
+description: 先说明要帮助的真实决策，再讨论功能。
+title: "[Idea] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: decision
+    attributes:
+      label: 要帮助哪一个决策？ / What decision should this help?
+      description: 请描述用户在什么情况下不知道今天该怎么安排。
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: 现在如何处理？ / Current workaround
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 最少需要哪些证据？ / Minimum evidence
+      description: 哪些字段真的会改变决定？哪些不需要进入系统？
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: 边界确认 / Boundaries
+      options:
+        - label: 这个建议不要求在公开 Issue 中提交真实健康数据或凭证。
+          required: true
+        - label: 我理解本项目不提供诊断或训练安全保证。
+          required: true

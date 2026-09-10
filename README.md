@@ -1,116 +1,96 @@
-# 余量 Yuliang · Garmin 数据解读助手
+# 余量 Yuliang
 
-这是独立应用仓库 [zhuyep/yuliang](https://github.com/zhuyep/yuliang)，也是后续持续改进的主项目。初始为私有仓库，尚未作为开源产品公开发布，公开许可证待单独确认。[English](README.en.md)
+> 把可穿戴数据，变成今天一条有依据、可被身体感受否决的安排建议。
 
-网页支持合成示例、日汇总 JSON，以及显式启用的本机数据库只读连接。与 Garmin 采集/看板项目分开维护：本仓库不包含其源码、登录脚本、私人数据或会话令牌。现阶段先验证四件事：
+[English](README.en.md) · [为什么值得公开](docs/PUBLIC_RELEASE.md) · [数据接入](docs/ADAPTERS.md)
 
-- 打开后能否立刻知道今天该怎么活动；
-- 建议是否能追溯到具体信号；
-- 主观感受能否推翻设备判断；
-- 今日调整是否会保持整周计划稳定。
+[![Quality](https://github.com/zhuyep/yuliang/actions/workflows/quality.yml/badge.svg)](https://github.com/zhuyep/yuliang/actions/workflows/quality.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-2563eb.svg)](LICENSE)
+[![Local first](https://img.shields.io/badge/data-local--first-287447.svg)](#隐私与安全边界)
 
-## 本地体验
+余量不是 Garmin 仪表盘，也不是替你诊断的 AI 教练。它只聚焦一个更窄、但每天都会遇到的问题：**睡眠、HRV、静息心率和主观体感有变化时，今天原本的活动该不该调整？**
 
-需要 Node.js 22.13 及以上版本，建议 Node.js 24。没有第三方包依赖，无需先安装依赖。在项目目录运行：
+![余量合成数据演示，画面中不含真实健康记录](docs/assets/yuliang-synthetic-demo.png)
 
-```bash
+_截图完全由合成数据生成，不代表任何人的真实健康状况。_
+
+## 它解决什么不同的问题
+
+| 常见工具 | 主要回答 | 余量补上的一层 |
+| --- | --- | --- |
+| 数据采集器 / API | 怎样把数据取出来 | 不负责登录或同步，只接收本机日汇总 |
+| 趋势仪表盘 | 最近发生了什么 | 先给出今天是否需要调整，再展开证据 |
+| 通用 AI 教练 | 还能生成什么建议 | 规则先于模型；数据不足和身体不适可以阻断建议 |
+
+每次解读都会显示数据日期、有效历史天数、个人中位数和证据编号。疼痛、生病迹象和用户自己的判断优先于设备分数；建议是否采纳、结果如何，可以只在本机补记。生成式 AI 默认关闭，缺少模型时仍能完整体验核心流程。
+
+## 60 秒本地体验
+
+需要 Node.js 22.13 或更高版本。项目没有第三方运行时依赖，无需注册账号，也不需要先安装 npm 包。
+
+`package.json` 中的 `private: true` 只是防止误发 npm 包，不代表 GitHub 仓库私有。
+
+```sh
+git clone https://github.com/zhuyep/yuliang.git
+cd yuliang
 npm run dev
 ```
 
-然后访问 `http://127.0.0.1:4173`。
+打开 <http://127.0.0.1:4173>，点击“试用合成示例”。然后可以：
 
-如果这台电脑已配置现有 Garmin Docker 数据库，使用：
+1. 查看“今天怎么安排”和对应的 E1–E5 证据；
+2. 改变原计划、精力或不适状态，重新解读；
+3. 追问睡眠、HRV 或安排依据；
+4. 记录是否采纳。合成演示不会写入反馈历史。
 
-```sh
-YULIANG_DATA_SOURCE=garmin-docker npm run dev
-```
-
-打开后可读取真实日指标，但不会触发 Garmin 同步。模型默认关闭。本机数据连接、日汇总导入格式和可选本地模型配置见 [使用说明](docs/LOCAL_INSIGHTS.md)。
-
-端口占用时可运行 `PORT=4180 npm run dev`。开发服务仅监听本机，只提供明确允许的前端资源，不提供 Git 记录、文档、个人文件和第三方目录。
-
-默认不调用外部网络服务。新界面把选取的日汇总发送至本机服务内存计算，不发送至互联网；只有点击保存时才将反馈与当时依据写入仓库之外的私人存储，刷新后可以回看与补记。合成演示反馈不落盘。
-
-提交前检查：
+提交代码前运行：
 
 ```sh
 npm run check
 ```
 
-仓库采用可提交文件白名单：新增源文件时同时审核 `.gitignore` 与 `scripts/check-repo.mjs`。仅暂存明确审阅过的文件，暂存后再运行检查；不要强制添加私人目录。检查是防误提交辅助工具，不能替代公开前的完整历史审查。
+## 数据接入
 
-## 可体验的流程
+公开版首先支持合成示例和用户主动选择的日汇总 JSON。导入文件只在本机服务内存中处理；除非用户点击保存反馈，否则不会持久化。格式定义见 [`docs/daily-summary.schema.json`](docs/daily-summary.schema.json)，接入说明见 [`docs/ADAPTERS.md`](docs/ADAPTERS.md)。
 
-1. 读取本机数据、导入日汇总，或明确选择合成示例；
-2. 看今日事实、历史有效天数、缺失与过期提示；
-3. 输入原计划与体感，重新解读；疼痛和生病迹象优先；
-4. 展开证据，追问睡眠、HRV 或安排依据；未启用模型时明确使用本机依据检索；
-5. 保存采纳情况，活动后补记结果，刷新后回看。
+如果你已经在本机运行兼容 garmin-grafana 数据结构的 InfluxDB，可显式启用实验性只读适配器：
 
-历史不足时不会制造个人基线；云端 AI 未接入。已实现的可选 Ollama 接口默认关闭，不能把本机规则解释当作生成式 AI 成功。
-
-### 保留的旧原型
-
-旧界面位于 `/index.html`，其导入与会话内反馈机制没有改成新版。下列功能与后面的旧 JSON 格式仅适用于它：
-
-1. 查看“今日路线”和建议依据；
-2. 改变精力、酸痛、疼痛、生病迹象等主观反馈，再更新建议；
-3. 输入今天原本的活动、时长和强度，观察建议如何调整；
-4. 展开“为什么这样安排”；
-5. 查看指标、本周计划与数据边界；
-6. 导入 `data/example-garmin-day.json` 验证“减量”场景，或导入 `data/example-ready-day.json` 验证“按计划”场景。
-
-## 两周自用验证
-
-项目已进入“造星计划”的重点孵化候选。2026-09-04 至 2026-09-18 先以维护者本人为第一用户，验证建议能否改变或确认真实活动决策，而不是先用功能数量或 Star 代替产品价值。
-
-验证口径、每日记录字段和公开化闸门见 [`DOGFOOD.md`](DOGFOOD.md)。既有手工日志保持不动；新版反馈另存于用户目录 `.local/share/yuliang/feedback.json`，不进入仓库。不把原始健康指标、账户信息或令牌写入公开文档。
-
-## 旧原型导入格式（仅 `/index.html`）
-
-JSON 顶层包含 `meta`、`today`、`baseline`，以及可选的 `plan` 和 `week`。下面是最小有效格式：
-
-```json
-{
-  "meta": {
-    "source": "合成示例",
-    "demo": true,
-    "syncedAt": "2026-09-04T07:12:00+08:00",
-    "completeness": 0.96
-  },
-  "today": {
-    "date": "2026-09-04",
-    "sleepMinutes": 402,
-    "hrvMs": 41,
-    "restingHeartRate": 58,
-    "bodyBatteryMorning": 58,
-    "bodyBatteryOvernightGain": 42,
-    "stressYesterday": 38
-  },
-  "baseline": {
-    "windowDays": 28,
-    "sleepMinutes": 438,
-    "hrvMs": 45,
-    "restingHeartRate": 55,
-    "stress": 31
-  }
-}
+```sh
+YULIANG_DATA_SOURCE=garmin-grafana-influxdb npm run dev
 ```
 
-导入文件最大 256 KB。原型会严格检查日期、ISO 8601 同步时间（须含时区）、数据类型和合理范围，不接受以文本表示的数字；HRV 基线必须大于 0。未提供 `plan` 时使用“30 分钟轻松日常活动”作为可编辑占位，未提供 `week` 时其他日期明确显示“未提供”，周负荷显示“数据不足”；即使提供 `week`，现有格式尚不能可靠计算训练负荷，因此显示“未计算”，不会套用示例结论。
+它只读取已有本机数据库，不安装采集器、不登录 Garmin、不触发同步，也不会把凭证传给网页或模型。可通过 `YULIANG_GARMIN_DB_CONTAINER` 指定容器名。该兼容层不是 Garmin 官方 API 集成，也不是公开多人授权方案。
 
-## 当前边界
+## 隐私与安全边界
 
-- 所有建议均为规则原型，不构成医疗建议；
-- 新界面已支持已有本机数据库只读接入，但不负责账户登录与同步；
-- 新界面已支持主动保存反馈、历史回看与补记，不会自动代替用户作出评价；
-- 本地模型接口已实现并通过合成协议测试，未选定或启用实际模型；云模型未接入；
-- 公开产品不得沿用个人版的非官方 Garmin 数据连接方式。
+- 服务只监听 `127.0.0.1`，静态资源使用明确白名单；
+- 默认不调用云端服务，不收集使用遥测；
+- 反馈写在仓库之外的本机用户目录，合成反馈不落盘；
+- 数据缺失、过期或历史不足时，不把未知值当成零，也不生成确定的训练调整；
+- 疼痛或生病迹象优先，输出不构成医疗建议、诊断或医疗器械功能；
+- 可选 Ollama 解释器默认关闭，只解释已有证据，不获得账号凭证、GPS 或工具权限。
 
-后续工作见 [路线图](docs/ROADMAP.md) 与 [架构边界](docs/ARCHITECTURE.md)。下一步是选定模型及许可范围、完成实际模型验收并积累自用反馈。
+完整说明见[本机使用与模型边界](docs/LOCAL_INSIGHTS.md)、[架构](docs/ARCHITECTURE.md)和[安全策略](SECURITY.md)。
 
-## 来源与公开发布
+## 当前状态
 
-本仓库不是 garmin-grafana 的 Fork。后者继续作为可选的本机数据与图表工具，详见 [第三方来源说明](THIRD_PARTY_NOTICES.md)。后续如果复制上游代码，必须保留相应版权、许可证及声明。
+这是 `v0.2.0` 公共预览版。确定性分析、合成演示、日汇总导入、本机反馈和实验性数据库兼容层已有自动化测试；以下事项仍未完成：
 
-私人连接脚本、健康记录、定位、截图、令牌、数据库及研究过程文件不进入本仓库。公开版首先提供文件输入和合成演示；不得把个人非官方连接实验包装成官方授权服务。公开可见性、模型数据外发与新增 Garmin 同步均需要相应的明确确认。
+- 规则没有临床验证，不能据此判断训练安全或疾病；
+- 没有官方 Garmin 账号授权、自动同步或活动写回；
+- 可选本地模型只做过合成协议测试，尚未形成已验证的模型推荐；
+- 外部用户价值与持续使用仍待验证，Star 不能替代这项验证。
+
+维护者自用验证仍按 [`DOGFOOD.md`](DOGFOOD.md) 继续。路线图见 [`docs/ROADMAP.md`](docs/ROADMAP.md)。
+
+## 独立来源与贡献
+
+本仓库是独立实现，不是 garmin-grafana 或其他健康项目的 Fork。公开前已复核完整 Git 历史、长行代码重合、第三方说明和合成数据边界；审查方法与仍然存在的不确定性记录在 [`docs/PUBLIC_RELEASE.md`](docs/PUBLIC_RELEASE.md)。通用指标名和数据库字段用于兼容既有数据结构，不代表复制上游实现。
+
+欢迎从三个小入口开始贡献：增加一种本地导出格式、补一个缺失/过期边界测试，或用不含健康数据的方式报告解释不清楚的场景。请先阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md) 和 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。
+
+Yuliang 使用 [MIT License](LICENSE)。Garmin、Garmin Connect、Body Battery 及相关标识属于其各自权利人；本项目与 Garmin 无隶属、赞助或背书关系。
+
+## English summary
+
+Yuliang is a local-first wearable decision companion. It turns daily summaries into one explainable activity adjustment, exposes the evidence behind it, and lets discomfort override device scores. It has no account login, cloud AI, telemetry, or automatic sync. Start with the synthetic demo; see the full [English README](README.en.md).

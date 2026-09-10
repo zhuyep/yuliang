@@ -4,7 +4,7 @@ let loading = false;
 let inputVersion = 0;
 let feedbackVersion = 0;
 let questionVersion = 0;
-const labels = { live: "本机 Garmin 数据", demo: "合成演示 · 非真实记录", import: "本地文件 · 来源未经核验" };
+const labels = { live: "本机可穿戴数据", demo: "合成演示 · 非真实记录", import: "本地文件 · 来源未经核验" };
 const decisions = { adopted: "采纳", modified: "部分采纳", ignored: "没有采纳" };
 const outcomes = { unrecorded: "尚未记录结果", better: "比预想轻松", same: "符合预期", worse: "更累或不适" };
 const text = (selector, value) => { $(selector).textContent = value; };
@@ -65,7 +65,7 @@ async function load(source) {
   try {
     const value = await api("/api/insight", { source, ...input(), ...(source === "import" ? { data: imported } : {}) });
     if (version !== inputVersion) { selectedSource = source; text("#page-message", "你的安排或体感已改变，请点击重新解读。刚返回的旧结果未被采用。"); return; }
-    selectedSource = source; render(value.report); text("#page-message", source === "live" ? "已读取本机库；这不等于刚刚同步了手环。" : labels[value.report.source]);
+    selectedSource = source; render(value.report); text("#page-message", source === "live" ? "已读取本机数据源；这不等于刚刚同步了设备。" : labels[value.report.source]);
   } catch (error) { text("#page-message", error.message); text("#source-state", "本次读取失败"); text("#reading-title", "读取未完成，暂不生成建议。"); text("#reading-mode", "读取失败"); text("#reading-summary", "没有使用示例数据或上一次解读冒充本次结果。"); text("#reading-action", "检查数据来源后重试。"); text("#coverage-state", "本次没有可用结果"); text("#answer", "请先成功读取数据。"); $("#reading-limits").replaceChildren(); $("#evidence-list-live").replaceChildren(); }
   finally {
     loading = false;

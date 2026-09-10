@@ -4,9 +4,21 @@
   "private": true,
   "type": "module",
   "description": "Local-first wearable data interpretation and activity planning prototype",
+  "license": "MIT",
+  "keywords": [
+    "wearables",
+    "local-first",
+    "health-data",
+    "garmin",
+    "explainable-ai"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/zhuyep/yuliang.git"
+  },
+  "homepage": "https://github.com/zhuyep/yuliang#readme",
+  "bugs": {
+    "url": "https://github.com/zhuyep/yuliang/issues"
   },
   "engines": {
     "node": ">=22.13.0"

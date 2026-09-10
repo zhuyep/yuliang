@@ -1,6 +1,6 @@
 const SAMPLE_DATA = {
   meta: {
-    source: "Garmin 示例数据",
+    source: "可穿戴合成示例",
     syncedAt: "2026-09-04T07:12:00+08:00",
     completeness: 0.96,
     demo: true,
@@ -440,7 +440,7 @@ function renderSource() {
   ui.railSyncTime.textContent = relative;
   ui.sourceDialogLabel.textContent = meta.source || "本地导入数据";
   ui.sourceDialogCopy.textContent = meta.demo
-    ? "当前展示的是一组用于验证界面的模拟数据，还没有连接你的 Garmin 账户。"
+    ? "当前展示的是一组用于验证界面的模拟数据，没有连接任何设备账户。"
     : "当前数据来自你刚刚导入的本地文件，只在这个浏览器会话中处理。";
   ui.sourceSyncTime.textContent = Number.isNaN(date.getTime()) ? "未知" : date.toLocaleString("zh-CN", { hour12: false });
   ui.sourceCompleteness.textContent = `${Math.round((meta.completeness ?? 0) * 100)}%`;
@@ -600,7 +600,7 @@ function setupInteractions() {
   });
 
   $(".avatar-button").addEventListener("click", () => {
-    showToast("个人档案将在接入真实 Garmin 数据时开放");
+    showToast("个人档案将在接入真实可穿戴数据时开放");
   });
 
   $("#import-data").addEventListener("click", () => $("#data-file").click());

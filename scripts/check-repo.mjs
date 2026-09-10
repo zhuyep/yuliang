@@ -4,12 +4,17 @@ import { execFileSync, spawnSync } from "node:child_process";
 
 const allowed = new Set([
   ".gitignore", ".gitattributes", "AGENTS.md", "README.md", "README.en.md",
-  "DOGFOOD.md", "THIRD_PARTY_NOTICES.md", "package.json", "index.html",
+  "DOGFOOD.md", "THIRD_PARTY_NOTICES.md", "LICENSE", "CONTRIBUTING.md",
+  "SECURITY.md", "package.json", "index.html",
   "app.js", "styles.css", "favicon.svg", "data/example-garmin-day.json",
   "data/example-ready-day.json", "scripts/serve.mjs", "scripts/check-repo.mjs",
   "tests/server.test.mjs", "docs/ARCHITECTURE.md", "docs/ROADMAP.md",
   "insights.html", "insights.css", "insights.js", "lib/analysis.mjs", "lib/api.mjs",
   "lib/garmin-database.mjs", "lib/feedback.mjs", "lib/model.mjs", "tests/insights.test.mjs", "docs/LOCAL_INSIGHTS.md",
+  "docs/ADAPTERS.md", "docs/PUBLIC_RELEASE.md", "docs/daily-summary.schema.json",
+  "docs/assets/yuliang-synthetic-demo.png", ".github/workflows/quality.yml",
+  ".github/ISSUE_TEMPLATE/bug.yml", ".github/ISSUE_TEMPLATE/idea.yml",
+  ".github/ISSUE_TEMPLATE/config.yml", ".github/pull_request_template.md",
 ]);
 const patterns = [
   ["GitHub credential", /(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})/],
@@ -41,7 +46,7 @@ for (const entry of entries) {
     }
   }
 }
-for (const path of [".private/probe.json", ".env", ".git-secret-probe", "data/garmin-live-probe.json", "data/new-user.json", "garmin-grafana/README.md", "scripts/sync_garmin_once.py", "output/probe.png", ".jez/probe.md"]) {
+for (const path of [".private/probe.json", ".env", ".git-secret-probe", "data/garmin-live-probe.json", "data/new-user.json", "garmin-grafana/README.md", "scripts/sync_garmin_once.py", "output/probe.png", ".jez/probe.md", "docs/assets/live-health.png"]) {
   if (spawnSync("git", ["check-ignore", "--no-index", "--quiet", path]).status !== 0) errors.push(`Private path not ignored: ${path}`);
 }
 if (errors.length) {

@@ -7,7 +7,7 @@ import { request } from "node:http";
 import vm from "node:vm";
 import { createAppServer } from "../scripts/serve.mjs";
 import { buildReport, demoSnapshot, importSnapshot, localDate, normalizeRows, answerLocally } from "../lib/analysis.mjs";
-import { normalizeInflux } from "../lib/garmin-database.mjs";
+import { isGarminDatabaseConfigured, normalizeInflux, validContainerName } from "../lib/garmin-database.mjs";
 import { createFeedbackStore } from "../lib/feedback.mjs";
 import { explain, validateModelAnswer } from "../lib/model.mjs";
 
@@ -90,6 +90,16 @@ test("Influx adapter joins local dates and discards device identity", () => {
   assert.deepEqual(normalizeInflux(payload).rows[0].invalidKeys, []);
   payload.results[0].series[0].values.push(payload.results[0].series[0].values[0]);
   assert.throws(() => normalizeInflux(payload), /ambiguous/);
+});
+
+test("Influx adapter accepts the public source name and legacy local alias only", () => {
+  assert.equal(isGarminDatabaseConfigured("garmin-grafana-influxdb"), true);
+  assert.equal(isGarminDatabaseConfigured("garmin-docker"), true);
+  assert.equal(isGarminDatabaseConfigured("garmin-connect"), false);
+  assert.equal(isGarminDatabaseConfigured(""), false);
+  assert.equal(validContainerName("garmin-local-influxdb-1"), true);
+  assert.equal(validContainerName("container; touch /tmp/nope"), false);
+  assert.equal(validContainerName(""), false);
 });
 
 test("local questions expose evidence and clearly label unsupported questions", () => {

@@ -8,7 +8,18 @@
 !/README.en.md
 !/DOGFOOD.md
 !/THIRD_PARTY_NOTICES.md
+!/LICENSE
+!/CONTRIBUTING.md
+!/SECURITY.md
 !/package.json
+!/.github/
+!/.github/ISSUE_TEMPLATE/
+!/.github/ISSUE_TEMPLATE/bug.yml
+!/.github/ISSUE_TEMPLATE/idea.yml
+!/.github/ISSUE_TEMPLATE/config.yml
+!/.github/workflows/
+!/.github/workflows/quality.yml
+!/.github/pull_request_template.md
 !/index.html
 !/app.js
 !/styles.css
@@ -40,6 +51,12 @@
 !/docs/ARCHITECTURE.md
 !/docs/ROADMAP.md
 !/docs/LOCAL_INSIGHTS.md
+!/docs/ADAPTERS.md
+!/docs/PUBLIC_RELEASE.md
+!/docs/daily-summary.schema.json
+!/docs/assets/
+/docs/assets/*
+!/docs/assets/yuliang-synthetic-demo.png
 # Never override these exclusions to publish personal data or credentials.
 **/.env
 **/.env.*

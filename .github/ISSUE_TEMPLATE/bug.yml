@@ -1,0 +1,37 @@
+name: 缺陷报告 / Bug report
+description: 使用合成数据报告可复现问题，不要上传真实健康记录。
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        谢谢你的报告。请只使用合成数据，并先确认这里不包含健康记录、位置、账号或凭证。
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认 / Privacy check
+      options:
+        - label: 我没有附上真实健康数据、GPS、账号信息、令牌或私人截图。
+          required: true
+  - type: input
+    id: version
+    attributes:
+      label: 版本与环境 / Version and environment
+      placeholder: v0.2.0, macOS 15, Node.js 24
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 最小复现 / Minimal reproduction
+      description: 请说明使用的合成场景、操作步骤和实际结果。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期边界 / Expected behavior
+      description: 你认为系统应如何处理缺失、过期、不适或其他边界？
+    validations:
+      required: true

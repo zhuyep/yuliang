@@ -1,26 +1,73 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="余量：把可穿戴数据变成有依据的今日解读。个人数据在本机处理。">
   <title>余量 · 今日解读</title>
-  <link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/insights.css">
+  <link rel="icon" href="/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/insights.css">
 </head>
 <body class="insights-page">
   <a class="skip-link" href="#insight-main">跳到解读</a>
-  <header class="insight-header"><a class="insight-brand" href="/">余量<span>每天，给自己一点余地。</span></a><nav aria-label="页面导航"><a href="#evidence-section">看依据</a><a href="#feedback-section">记反馈</a><a href="/index.html">原型演示</a></nav><span class="privacy-tag">本机处理</span></header>
+  <header class="insight-header">
+    <a class="insight-brand" href="/">余量<span>每天，给自己一点余地。</span></a>
+    <nav aria-label="页面导航"><a href="#evidence-section">看依据</a><a href="#feedback-section">记反馈</a><a href="/index.html">原型演示</a></nav>
+    <span class="privacy-tag">本机处理</span>
+  </header>
   <main id="insight-main" class="insight-main">
-    <div class="insight-intro"><div><p class="eyebrow">从数据，到今天的安排</p><h1>今天，怎么安排？</h1><p class="muted">先了解变化，再把你的感受放进来。</p></div><p id="model-state" class="engine-note">生成式 AI 未启用</p></div>
-    <section class="source-bar" aria-label="数据来源"><div><strong id="source-state">尚未读取数据</strong><p id="sync-state" class="muted">读取本机库不会触发 Garmin 同步。</p></div><div class="source-actions"><button type="button" id="load-live" class="primary-button">读取本机数据</button><button type="button" id="load-demo" class="secondary-button">试用合成示例</button><label class="secondary-button file-label">导入日汇总<input type="file" id="import-days" accept=".json,application/json"></label></div></section>
+    <div class="insight-intro">
+      <div><p class="eyebrow">从数据，到今天的安排</p><h1>今天，怎么安排？</h1><p class="muted">先了解变化，再把你的感受放进来。</p></div>
+      <p id="model-state" class="engine-note">生成式 AI 未启用</p>
+    </div>
+    <section class="source-bar" aria-label="数据来源">
+      <div><strong id="source-state">尚未读取数据</strong><p id="sync-state" class="muted">读取本机数据源不会触发设备账号同步。</p></div>
+      <div class="source-actions"><button type="button" id="load-live" class="primary-button">读取本机数据</button><button type="button" id="load-demo" class="secondary-button">试用合成示例</button><label class="secondary-button file-label">导入日汇总<input type="file" id="import-days" accept=".json,application/json"></label></div>
+    </section>
     <p id="page-message" class="status-message" role="status" aria-live="polite"></p>
     <div class="insight-columns">
-      <section class="reading-card" aria-labelledby="reading-title"><div class="reading-meta"><span id="report-date">等待数据</span><span id="reading-mode">尚未分析</span></div><h2 id="reading-title">先选一份数据。</h2><p id="reading-summary">可以读取已有的本机健康库，或先用合成示例体验。数据缺失时不会自动切换成示例。</p><div class="action-panel"><span class="eyebrow">安排参考</span><p id="reading-action">你的原计划与身体感受，会一起影响这里的建议。</p></div><ul id="reading-limits" class="reading-limits"><li>用于日常活动安排辅助，不用于疾病诊断。</li></ul></section>
-      <form id="plan-form" class="plan-card"><h2>今天的安排</h2><div class="plan-fields"><label>原本准备做什么<input id="plan-activity" maxlength="40" value="日常活动" required></label><label>可用时间（分钟）<input id="plan-minutes" type="number" min="5" max="240" step="1" value="30" required></label><label>原计划强度<select id="plan-intensity"><option value="easy">轻松</option><option value="moderate">中等</option><option value="hard">较高</option></select></label><label>现在的精力<select id="check-energy"><option value="normal">一般</option><option value="low">偏低</option><option value="high">不错</option></select></label></div><fieldset><legend>还有哪些感受？</legend><label><input type="checkbox" id="check-soreness">明显酸痛</label><label><input type="checkbox" id="check-pain">疼痛不适</label><label><input type="checkbox" id="check-illness">可能生病</label></fieldset><button class="primary-button" id="update-insight" type="submit">按我的情况重新解读</button><p class="muted small">不适优先于设备分数；不会自动修改 Garmin 日程。</p></form>
+      <section class="reading-card" aria-labelledby="reading-title">
+        <div class="reading-meta"><span id="report-date">等待数据</span><span id="reading-mode">尚未分析</span></div>
+        <h2 id="reading-title">先选一份数据。</h2>
+        <p id="reading-summary">可以导入本机日汇总、读取已配置的数据源，或先用合成示例体验。数据缺失时不会自动切换成示例。</p>
+        <div class="action-panel"><span class="eyebrow">安排参考</span><p id="reading-action">你的原计划与身体感受，会一起影响这里的建议。</p></div>
+        <ul id="reading-limits" class="reading-limits"><li>用于日常活动安排辅助，不用于疾病诊断。</li></ul>
+      </section>
+      <form id="plan-form" class="plan-card">
+        <h2>今天的安排</h2>
+        <div class="plan-fields">
+          <label>原本准备做什么<input id="plan-activity" maxlength="40" value="日常活动" required></label>
+          <label>可用时间（分钟）<input id="plan-minutes" type="number" min="5" max="240" step="1" value="30" required></label>
+          <label>原计划强度<select id="plan-intensity"><option value="easy">轻松</option><option value="moderate">中等</option><option value="hard">较高</option></select></label>
+          <label>现在的精力<select id="check-energy"><option value="normal">一般</option><option value="low">偏低</option><option value="high">不错</option></select></label>
+        </div>
+        <fieldset><legend>还有哪些感受？</legend><label><input type="checkbox" id="check-soreness">明显酸痛</label><label><input type="checkbox" id="check-pain">疼痛不适</label><label><input type="checkbox" id="check-illness">可能生病</label></fieldset>
+        <button class="primary-button" id="update-insight" type="submit">按我的情况重新解读</button>
+        <p class="muted small">不适优先于设备分数；不会自动修改设备端日程。</p>
+      </form>
     </div>
-    <section id="evidence-section" class="evidence-section"><div class="section-heading"><div><p class="eyebrow">每个结论，都有来处</p><h2>把依据摊开看</h2></div><p id="coverage-state" class="muted">尚无可比较记录</p></div><div id="evidence-list-live" class="evidence-grid"><p class="empty-note">读取数据后，会显示数值、日期和有效历史天数。</p></div></section>
-    <section class="ask-card" aria-labelledby="ask-title"><div><p class="eyebrow">继续问清楚</p><h2 id="ask-title">为什么这样解读？</h2><p class="muted">未启用模型时，使用本机依据检索，不冒充 AI 回答。</p></div><div class="question-chips"><button type="button" data-question="睡眠和个人常态有什么变化？">看看睡眠</button><button type="button" data-question="HRV 应该怎么看？">看懂 HRV</button><button type="button" data-question="为什么是这个活动安排？">解释安排</button></div><form id="ask-form"><label class="sr-only" for="question">你的问题</label><input id="question" maxlength="500" placeholder="问问睡眠、心率，或这次安排的依据……" required><button class="primary-button" type="submit">查看解释</button></form><p id="answer-engine" class="muted small"></p><div id="answer" class="answer-text" role="status" aria-live="polite">问题会结合当前这份解读回答。</div></section>
-    <section id="feedback-section" class="feedback-card"><div><p class="eyebrow">让下一次，有据可改</p><h2>这次建议，帮到你了吗？</h2><p class="muted">记录你的选择与后续感受。仅保存到本机，刷新后仍可查看。</p></div><form id="feedback-form"><div class="plan-fields"><label>我的选择<select id="decision"><option value="adopted">采纳</option><option value="modified">部分采纳 / 自己调整</option><option value="ignored">没有采纳</option></select></label><label>活动后感觉<select id="outcome"><option value="unrecorded">还没记录</option><option value="better">比预想轻松</option><option value="same">符合预期</option><option value="worse">比预想更累 / 不适</option></select></label></div><label>补充一句（可选）<textarea id="feedback-note" maxlength="500" rows="2" placeholder="哪里有帮助，哪里不符合你的实际情况？"></textarea></label><button class="primary-button" type="submit">保存本次反馈</button></form><p id="feedback-message" class="status-message" role="status"></p><h3>最近的记录</h3><div id="feedback-history"><p class="muted">暂无记录。</p></div></section>
-    <footer class="insight-footer">余量 · 独立原型 <span>数据不足会明说，示例与真实记录始终分开。</span></footer>
+    <section id="evidence-section" class="evidence-section">
+      <div class="section-heading"><div><p class="eyebrow">每个结论，都有来处</p><h2>把依据摊开看</h2></div><p id="coverage-state" class="muted">尚无可比较记录</p></div>
+      <div id="evidence-list-live" class="evidence-grid"><p class="empty-note">读取数据后，会显示数值、日期和有效历史天数。</p></div>
+    </section>
+    <section class="ask-card" aria-labelledby="ask-title">
+      <div><p class="eyebrow">继续问清楚</p><h2 id="ask-title">为什么这样解读？</h2><p class="muted">未启用模型时，使用本机依据检索，不冒充 AI 回答。</p></div>
+      <div class="question-chips"><button type="button" data-question="睡眠和个人常态有什么变化？">看看睡眠</button><button type="button" data-question="HRV 应该怎么看？">看懂 HRV</button><button type="button" data-question="为什么是这个活动安排？">解释安排</button></div>
+      <form id="ask-form"><label class="sr-only" for="question">你的问题</label><input id="question" maxlength="500" placeholder="问问睡眠、心率，或这次安排的依据……" required><button class="primary-button" type="submit">查看解释</button></form>
+      <p id="answer-engine" class="muted small"></p><div id="answer" class="answer-text" role="status" aria-live="polite">问题会结合当前这份解读回答。</div>
+    </section>
+    <section id="feedback-section" class="feedback-card">
+      <div><p class="eyebrow">让下一次，有据可改</p><h2>这次建议，帮到你了吗？</h2><p class="muted">记录你的选择与后续感受。仅保存到本机，刷新后仍可查看。</p></div>
+      <form id="feedback-form">
+        <div class="plan-fields"><label>我的选择<select id="decision"><option value="adopted">采纳</option><option value="modified">部分采纳 / 自己调整</option><option value="ignored">没有采纳</option></select></label><label>活动后感觉<select id="outcome"><option value="unrecorded">还没记录</option><option value="better">比预想轻松</option><option value="same">符合预期</option><option value="worse">比预想更累 / 不适</option></select></label></div>
+        <label>补充一句（可选）<textarea id="feedback-note" maxlength="500" rows="2" placeholder="哪里有帮助，哪里不符合你的实际情况？"></textarea></label>
+        <button class="primary-button" type="submit">保存本次反馈</button>
+      </form>
+      <p id="feedback-message" class="status-message" role="status"></p><h3>最近的记录</h3><div id="feedback-history"><p class="muted">暂无记录。</p></div>
+    </section>
+    <footer class="insight-footer">余量 · 开源预览 / Public preview <span>数据不足会明说，示例与真实记录始终分开。</span></footer>
   </main>
   <script src="/insights.js" type="module"></script>
-</body></html>
+</body>
+</html>

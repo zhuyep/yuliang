@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="余量是一款本地优先的 Garmin 数据解读原型，把恢复信号翻译成当天和本周的活动安排。"
+      content="余量是一款本地优先的可穿戴数据解读原型，把日汇总翻译成当天和本周的活动安排。"
     />
     <meta name="theme-color" content="#f5f5f7" />
-    <title>余量 · Garmin 数据解读助手</title>
+    <title>余量 · 可穿戴数据解读原型</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -65,9 +65,9 @@
             <p class="topbar-context">个人恢复与活动安排</p>
           </div>
           <div class="topbar-actions">
-            <button class="source-pill" id="source-button" type="button" aria-haspopup="dialog" aria-label="查看数据来源：Garmin 示例数据">
+            <button class="source-pill" id="source-button" type="button" aria-haspopup="dialog" aria-label="查看数据来源：合成示例">
               <span class="source-status" aria-hidden="true"></span>
-              <span id="source-label">Garmin 示例数据</span>
+              <span id="source-label">可穿戴合成示例</span>
             </button>
             <button class="avatar-button" type="button" aria-label="个人设置">我</button>
           </div>
@@ -392,8 +392,8 @@
         <button class="dialog-close" id="close-source" aria-label="关闭">×</button>
       </div>
       <div class="source-detail">
-        <div><span class="source-status"></span><strong id="source-dialog-label">Garmin 示例数据</strong></div>
-        <p id="source-dialog-copy">当前展示的是一组用于验证界面的模拟数据，还没有连接你的 Garmin 账户。</p>
+        <div><span class="source-status"></span><strong id="source-dialog-label">合成示例 · 非真实记录</strong></div>
+        <p id="source-dialog-copy">当前展示的是一组用于验证界面的模拟数据，没有连接任何设备账户。</p>
         <dl>
           <div><dt>最后同步</dt><dd id="source-sync-time">2026-09-04 07:12</dd></div>
           <div><dt>数据完整性</dt><dd id="source-completeness">96%</dd></div>

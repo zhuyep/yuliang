@@ -11,10 +11,10 @@ npm run dev
 维护者现有本机 Docker 数据库已安装时：
 
 ```sh
-YULIANG_DATA_SOURCE=garmin-docker npm run dev
+YULIANG_DATA_SOURCE=garmin-grafana-influxdb npm run dev
 ```
 
-连接只使用固定的 SELECT 查询，通过现有 InfluxDB 容器的只读账号读取数据。密码留在容器内部，不进入网页、模型、进程参数或源码。此适配器依赖名为 `garmin-local-influxdb-1` 的已有容器，不安装或修改第三方采集器，不登录 Garmin，不触发 Garmin 同步。
+连接只使用固定的 SELECT 查询，通过现有 InfluxDB 容器的只读账号读取数据。密码留在容器内部，不进入网页、模型、进程参数或源码。此适配器默认读取名为 `garmin-local-influxdb-1` 的已有容器；可用 `YULIANG_GARMIN_DB_CONTAINER` 指定其他合规容器名。它不安装或修改第三方采集器，不登录 Garmin，不触发 Garmin 同步。旧值 `garmin-docker` 仅为已有本机配置保留。
 
 “读取本机数据”只重新读取数据库；“设备最后上传”和“本页读取”分别显示，不混为一次成功同步。没有安装定时同步或自动调度。
 
@@ -68,4 +68,4 @@ YULIANG_DATA_SOURCE=garmin-docker npm run dev
 
 服务仅监听本机。API 检查 Host、Origin、跨站来源与页面会话令牌；私人文件和源代码仍不通过静态文件路由提供。该设计不是多用户鉴权方案，不能直接部署到公网。
 
-本仓库保持私有。公开发布、云模型、额外账号接入和扩大同步范围不由代码变更自动授权。
+本仓库以公共预览方式开源。公开可见不代表允许云模型、额外账号接入、扩大同步范围或上传个人数据；这些边界不由普通代码变更自动放宽。

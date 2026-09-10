@@ -7,7 +7,7 @@
 | 今日解读界面 | insights.html、insights.css、insights.js | 数据读取、证据、追问、反馈及回看 |
 | 计算 | lib/analysis.mjs | 标准化、上海时区、历史有效日、基线、缺失/陈旧与体感边界 |
 | 本机 API | lib/api.mjs | 来源/会话检查、受限请求、版本化解读与反馈操作 |
-| 数据适配 | lib/garmin-database.mjs | 已有数据库固定 SELECT、只读凭证不离开容器 |
+| 数据适配 | lib/garmin-database.mjs | 实验性 garmin-grafana InfluxDB 兼容层；固定 SELECT、只读凭证不离开容器 |
 | 私人反馈 | lib/feedback.mjs | 仓库外原子保存、权限检查、结果补记 |
 | 可选本地模型 | lib/model.mjs | Ollama 协议、显式许可、超时/验证失败回退，默认关闭 |
 | 交互 | index.html、styles.css、favicon.svg | 中文响应式页面 |
@@ -27,4 +27,4 @@
 
 数据、计算、依据查询与反馈已经接通。可选本地模型接口仅通过合成协议测试，实际模型尚未启用；没有云模型实现。模型没有 Garmin 凭证，不获得任意数据库查询或训练计划写入权限。实际模型与允许发送的字段须经用户确认。详见 LOCAL_INSIGHTS.md。
 
-公开核心首先支持本地文件输入。个人非官方连接实验不作为公开多人授权方案；后续官方接入须单独核验资格、地区覆盖与服务条款。
+公开核心首先支持符合 JSON Schema 的本地文件输入。实验性数据库兼容层不包含第三方采集代码，也不作为公开多人授权方案；后续官方接入须单独核验资格、地区覆盖与服务条款。

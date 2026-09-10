@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 私密安全报告 / Private security report
+    url: https://github.com/zhuyep/yuliang/security/advisories/new
+    about: 凭证、私人文件或健康数据暴露请不要使用公开 Issue。
