@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="余量 Yuliang: try an explainable wearable decision with synthetic data. 无需安装，用合成数据体验今天怎么安排。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>余量 Yuliang · Interactive demo / 在线试用</title>
+  <link rel="icon" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip" href="#demo" data-copy="skip">跳到试用</a>
+  <header>
+    <a class="brand" href="https://github.com/zhuyep/yuliang">余量 <span>Yuliang</span></a>
+    <nav aria-label="Language / 语言"><button id="language" type="button">English</button><a href="https://github.com/zhuyep/yuliang">GitHub ↗</a></nav>
+  </header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow" data-copy="eyebrow">无需安装 · 合成数据在线试用</p>
+      <h1 data-copy="title">数字说了一堆。<br>今天，怎么安排？</h1>
+      <p class="lead" data-copy="lead">用一个虚构的早晨，试试设备数据、原计划与身体感受如何一起影响建议。</p>
+      <p class="privacy" data-copy="privacy">只用合成示例，不连接账号、不导入健康数据。切换条件不会发送或保存任何输入。</p>
+    </section>
+    <section id="demo" class="demo" aria-label="Interactive synthetic example / 合成交互示例">
+      <div class="controls">
+        <p class="eyebrow" data-copy="choose">选一个情境</p>
+        <div class="scenarios" role="group" aria-label="Scenario / 情境">
+          <button type="button" data-scenario="usual" aria-pressed="true" data-copy="usual">照常的一天</button>
+          <button type="button" data-scenario="tired" aria-pressed="false" data-copy="tired">今天有点累</button>
+          <button type="button" data-scenario="missing" aria-pressed="false" data-copy="missing">设备漏了记录</button>
+        </div>
+        <label class="field" for="minutes"><span data-copy="minutes">原计划活动时长</span><span><output id="duration" for="minutes">30</output> <span data-copy="unitMinutes">分钟</span></span></label>
+        <input id="minutes" type="range" min="5" max="90" step="5" value="30">
+        <label class="override"><input id="discomfort" type="checkbox"><span><strong data-copy="discomfort">假设出现疼痛不适</strong><small data-copy="overrideHint">看看身体感受能否否决设备分数。</small></span></label>
+        <button id="reset" class="reset" type="button" data-copy="reset">重置示例</button>
+      </div>
+      <article class="reading" aria-live="polite" aria-atomic="true">
+        <p class="reading-meta"><span data-copy="synthetic">合成情境 · 非本人数据</span><span id="mode"></span></p>
+        <h2 id="headline">正在加载合成示例 / Loading synthetic example…</h2>
+        <p id="action"></p>
+        <div class="basis"><strong data-copy="why">为什么会这样？</strong><p id="reason"></p></div>
+        <p id="plan" class="plan"></p>
+      </article>
+    </section>
+    <section class="evidence" aria-labelledby="evidence-title">
+      <div class="section-heading"><h2 id="evidence-title" data-copy="evidence">依据，摊开看。</h2><p id="coverage"></p></div>
+      <div class="table-wrap"><table><caption class="sr-only" data-copy="tableCaption">合成当天数据与此前个人中位数比较</caption><thead><tr><th data-copy="metric">指标</th><th data-copy="today">示例当天</th><th data-copy="baseline">此前中位数</th><th data-copy="sample">有效历史日</th></tr></thead><tbody id="evidence-rows"></tbody></table></div>
+      <p class="note" data-copy="evidenceNote">“此前中位数”取合成当天之前 28 天内的有效值；它不是医学阈值。缺失值不会被当作零。</p>
+    </section>
+    <section class="next">
+      <div><h2 data-copy="nextTitle">这个判断过程，对你有用吗？</h2><p data-copy="nextBody">本地版支持自己选择的日汇总 JSON、依据追问和本机反馈。欢迎告诉我们：哪里看不懂，或哪一步还解决不了你的问题。</p></div>
+      <div class="links"><a class="primary" id="local-link" href="https://github.com/zhuyep/yuliang#60-秒本地体验" data-copy="local">试用本地版 ↗</a><a id="feedback-link" href="https://github.com/zhuyep/yuliang/issues/new?template=idea.yml" data-copy="feedback">反馈一个问题 ↗</a></div>
+      <p class="note" data-copy="feedbackNote">反馈会由你在 GitHub 确认后发布；请只描述体验，不填写健康指标、账号或私人截图。</p>
+    </section>
+  </main>
+  <footer><p data-copy="footer">公共预览 · 确定性规则，未启用生成式 AI。不是医疗建议，也不判断训练是否安全。与 Garmin 无隶属或背书关系。</p><a href="https://github.com/zhuyep/yuliang/blob/main/LICENSE">MIT · Source on GitHub ↗</a></footer>
+  <noscript><p>此交互示例需要 JavaScript。 / Enable JavaScript to try this synthetic example. <a href="https://github.com/zhuyep/yuliang">Read the source / 阅读源码</a></p></noscript>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

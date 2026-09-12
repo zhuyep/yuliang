@@ -15,6 +15,8 @@ const allowed = new Set([
   "docs/assets/yuliang-synthetic-demo.png", ".github/workflows/quality.yml",
   ".github/ISSUE_TEMPLATE/bug.yml", ".github/ISSUE_TEMPLATE/idea.yml",
   ".github/ISSUE_TEMPLATE/config.yml", ".github/pull_request_template.md",
+  "demo/index.html", "demo/styles.css", "demo/app.mjs", "demo/scenarios.mjs",
+  "scripts/build-demo.mjs", "tests/demo.test.mjs", ".github/workflows/demo-pages.yml",
 ]);
 const patterns = [
   ["GitHub credential", /(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})/],

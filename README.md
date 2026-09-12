@@ -4,6 +4,10 @@
 
 [English](README.en.md) · [为什么值得公开](docs/PUBLIC_RELEASE.md) · [数据接入](docs/ADAPTERS.md)
 
+**[立即在线试用 →](https://zhuyep.github.io/yuliang/?lang=zh)** · [Try in English](https://zhuyep.github.io/yuliang/?lang=en)
+
+无需安装或账号。切换“有点累”“漏了记录”或“疼痛不适”，看一条建议如何变化。在线版只用合成数据；自己的日汇总在下方本地版处理。
+
 [![Quality](https://github.com/zhuyep/yuliang/actions/workflows/quality.yml/badge.svg)](https://github.com/zhuyep/yuliang/actions/workflows/quality.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2563eb.svg)](LICENSE)
 [![Local first](https://img.shields.io/badge/data-local--first-287447.svg)](#隐私与安全边界)

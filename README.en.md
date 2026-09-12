@@ -4,6 +4,10 @@
 
 [中文](README.md) · [Public-value review](docs/PUBLIC_RELEASE.md) · [Data adapters](docs/ADAPTERS.md)
 
+**[Try the interactive demo →](https://zhuyep.github.io/yuliang/?lang=en)** · [中文在线试用](https://zhuyep.github.io/yuliang/?lang=zh)
+
+No install or account. Switch between tiredness, a missing record, and discomfort to see how one suggestion changes. The online demo uses synthetic data only; use the local app below for your own daily summaries.
+
 [![Quality](https://github.com/zhuyep/yuliang/actions/workflows/quality.yml/badge.svg)](https://github.com/zhuyep/yuliang/actions/workflows/quality.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2563eb.svg)](LICENSE)
 [![Local first](https://img.shields.io/badge/data-local--first-287447.svg)](#privacy-and-safety-boundaries)

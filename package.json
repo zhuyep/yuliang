@@ -25,8 +25,9 @@
   },
   "scripts": {
     "dev": "node scripts/serve.mjs",
+    "build:demo": "node scripts/build-demo.mjs",
     "test": "node --test tests/*.test.mjs",
     "check:repo": "node scripts/check-repo.mjs",
-    "check": "node --check app.js && node --check insights.js && node --check scripts/serve.mjs && npm test && npm run check:repo"
+    "check": "node --check app.js && node --check insights.js && node --check scripts/serve.mjs && node --check demo/app.mjs && npm test && npm run check:repo"
   }
 }

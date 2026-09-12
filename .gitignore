@@ -19,6 +19,7 @@
 !/.github/ISSUE_TEMPLATE/config.yml
 !/.github/workflows/
 !/.github/workflows/quality.yml
+!/.github/workflows/demo-pages.yml
 !/.github/pull_request_template.md
 !/index.html
 !/app.js
@@ -42,10 +43,18 @@
 /scripts/*
 !/scripts/serve.mjs
 !/scripts/check-repo.mjs
+!/scripts/build-demo.mjs
+!/demo/
+/demo/*
+!/demo/index.html
+!/demo/styles.css
+!/demo/app.mjs
+!/demo/scenarios.mjs
 !/tests/
 /tests/*
 !/tests/server.test.mjs
 !/tests/insights.test.mjs
+!/tests/demo.test.mjs
 !/docs/
 /docs/*
 !/docs/ARCHITECTURE.md
